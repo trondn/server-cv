@@ -56,6 +56,10 @@ pipeline {
                                           wipStateChanged()])])])
                 }
 
+                // default CMAKE_ARGS to an empty string if unset. Needs to be set _before_
+                // we load the config files as they refer to the variable
+                env.CMAKE_ARGS = env.CMAKE_ARGS ?: ""
+
                 // look for config files which specify env vars
                 loadEnvFiles()
 
