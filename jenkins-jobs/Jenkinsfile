@@ -66,7 +66,7 @@ pipeline {
                 // manifest from Gerrit server GERRIT_HOST:GERRIT_PORT, compiles and then
                 // runs unit tests for GERRIT_PROJECT (if applicable).
                 script {
-                    requiredEnvVars = ['GERRIT_HOST',
+                    def requiredEnvVars = ['GERRIT_HOST',
                                        'GERRIT_PORT',
                                        'GERRIT_PROJECT',
                                        'GERRIT_PATCHSET_REVISION',
@@ -75,6 +75,7 @@ pipeline {
 
                     for (var in requiredEnvVars) {
                         if (!env.getProperty(var)){
+                            echo "Required environment variable '${var}' not set."
                             error "Required environment variable '${var}' not set."
                         }
                     }
